@@ -1,0 +1,36 @@
+1. what is singleton design pattern?
+	- only one instance of class created throughout the application
+	Steps:
+		a) constructors should be private
+		b) provide static method which returns ref. of instance
+		 lazy initialisation concept is used to write static method
+		c) instance is stored as private static variable
+		class Student{
+			private int rno;
+			private String name;
+			private static Student s;
+			private Student(){
+
+			}
+			public static Student getStudent(){
+				if(s==null)
+				return new Student();
+			}
+		}
+		class School{
+
+		Student s = Student.getStudent();
+		}
+
+
+2. Explain authentication & authorization with an example?
+
+3. Add Employee
+	class Employee{
+		Long id;
+		String name;
+		Boolean visitedFlag;
+	}
+
+	List<Employee> = fetch all employees whose visitedFlag is false
+	randomly fetch one employee from list then update with visitedFlag true

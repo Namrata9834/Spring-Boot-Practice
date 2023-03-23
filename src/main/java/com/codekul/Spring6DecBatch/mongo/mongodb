@@ -1,0 +1,94 @@
+- NoSQL database
+Types of Database Management System
+1. RDBMS
+2. NoSQL
+3. OLAP(Online Analytical Processing)
+
+NoSQL
+- scalable & faster
+- non relational
+- key-value pair
+- powerful
+- high performance
+eg. Mongodb,DocumentDB,Google Datastore,Amazon Dynamodb
+
+when to use NoSql
+- want to store & retrieve huge amount of data
+- relationship between the data are not important
+- data is not structured
+- data is growing continuously
+
+MongoDB
+- open source and free
+- document oriented database that means data is stored in the form of documents(Key-Value pair)
+- uses JSON like document
+- does not have concept of joins
+	database----> database - collection of collections,physical container
+	table-------> Collections - group of documents
+	rows--------> Document - set of key-value Pairs
+	columns------> fields
+
+DataTypes:
+1. BSON - Binary Encoded Json - Date,Timestamp,ObjectId
+2. JSON - {"name":"abc","age":5}
+3. Integer
+4. Boolean
+5. Double
+6. Arrays
+7. Object
+8. Date
+9. Null
+10. Timestamp
+11. ObjectId
+
+Commands:
+	1. use <database_name> select database workspace(current using database)
+		- if db is not exist then it will create new db with specified name but did not showed in
+			show database command until collections created
+	2. to drop database db.dropDatabase()
+	3. db - currently working db
+	4. create collections
+		db.createCollection(name of collection);
+	5. insert
+		db.user.insertOne({name:"neha",designation:"BCA",email:"neha@gmail.com",mobile:"9856321455",
+		permanentAddress:{buildingName:"Sun Grandeur"}});
+	6. find by field value
+		db.user.find({name:"abhishek"})
+	7. and
+		spring6Dec> db.user.find({$and:[{name:'neha'},{designation:'BCA'}]});
+	8. or
+		spring6Dec> db.user.find({$or:[{name:'neha'},{designation:'BCA'}]});
+	9. find by embedded field
+		spring6Dec> db.user.find({'permanentAddress.city':'Pune'});
+	10. create Index
+		spring6Dec> db.user.createIndex({designation:"text"});
+	11. get indexes
+		spring6Dec> db.user.getIndexes();
+	12. search
+		spring6Dec> db.user.find({$text:{$search:'Student'}});
+	13. Greater Than
+		spring6Dec> db.user.find({"permanentAddress.flatNo":{'$gt':30}});
+
+
+
+
+
+Commands
+1. use springpractice
+2. show dbs;
+3. db.user.insert({name:"aditya",age:25});
+4. db.user.find().pretty();
+5. db.dropDatabase();
+
+db.createUser(
+  {
+    user: "admin",
+    pwd:  passwordPrompt(),
+    roles: [ { role: "readWrite", db: "springpractice" },
+             { role: "read", db: "test" } ]
+  }
+)
+
+7.  mongosh --port 27017 -u "admin" --authenticationDatabase "springpractice" -p
+8. db.customer.createIndex({city:"text",customerName:"text"});
+9. db.customer.find({address:{$regex: 'Near Sadashiv PETH',$options:"i"}});

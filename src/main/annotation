@@ -1,0 +1,79 @@
+
+
+@EnableAutoConfiguration - to creating beans automatically by scanning the classpath
+
+@ComponentScan -  annotations like @Component, @Configuration, @Service, @Repository are specified
+on classes to mark them as Spring beans
+- to scan the current package and its sub-packages in order to identify annotated classes and
+configure them as Spring beans
+
+1. @Configuration
+	- indicates that the class is a source of bean definition
+
+2. @Bean
+	- method level annotation
+Scope :
+    a) singleton
+    - Only one instance of the bean will be created for each container.
+    - default scope for the spring beans.
+
+    b) prototype - A new instance will be created every time the bean is requested.
+    c) request - This is same as prototype scope,
+     however it’s meant to be used for web applications.
+     A new instance of the bean will be created for each HTTP request.
+    d) session - A new bean will be created for each HTTP session by the container.
+    e) global-session - used to create global session beans for Portlet applications.
+
+3. @Component
+
+4. @Autowired
+	- used for dependency injection
+
+5. @Setter
+	- generates the setter methods
+
+6. @Getter
+	- generates the getter methods
+
+7. @AllArgsConstructor
+	- generates parameterised constructor with all the fields
+8. @NoArgsConstructor
+	- generates no arg constructor
+9. @RestController
+	- for making restful web services
+	- class level annotation
+	- allows the class to handle the requests which made by client
+	- allows to handle all the APIs like GET,POST,PUT,DELETE requests
+	- combination of @controller & @RequestBody
+
+10. @Repository
+	- a specialization of @Component annotation which is used to indicate that the class  provide the
+	mechanism for storage,retrieval,search,update,delete operations on objects
+
+11.	@Entity
+	- defines that a class can be mapped to a table
+
+12.  @Id
+    - specifies the primary key
+13. @GeneratedValue
+	- auto increment
+
+14. @PostMapping
+	- maps HTTP post requests
+
+15. @Service
+	- used with classes that provide some business functionalities
+
+16. @JoinColumn
+	- used to join a new column, this will be the foreign key column
+
+17.  @JsonManagedReference
+
+18. @Value
+	- to read application properties
+
+19. @Embeddable & @EmbeddedId
+	- represent composite keys
+
+20. @JsonInclude(JsonInclude.Include.NON_NULL)
+

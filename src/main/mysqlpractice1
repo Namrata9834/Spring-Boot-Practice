@@ -1,0 +1,135 @@
+mysql> create table customer(id int auto_increment primary key,accountno int,customername varchar(30),mobileno int,email varchar(30),address varchar(100));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc customer;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int          | NO   | PRI | NULL    | auto_increment |
+| accountno    | int          | YES  |     | NULL    |                |
+| customername | varchar(30)  | YES  |     | NULL    |                |
+| mobileno     | int          | YES  |     | NULL    |                |
+| email        | varchar(30)  | YES  |     | NULL    |                |
+| address      | varchar(100) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> create table transactions(id int auto_increment primary key,account_type varchar(10),amount double,customer_id int,constraint fk_customer foreign key (customer_id) references customer(id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc transactions;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id           | int         | NO   | PRI | NULL    | auto_increment |
+| account_type | varchar(10) | YES  |     | NULL    |                |
+| amount       | double      | YES  |     | NULL    |                |
+| customer_id  | int         | YES  | MUL | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+insert into customer(accountno,customername,mobileno,email,address) values(123,'Vijaya',98765,'vijaya@gmail.com','Mumbai');
+insert into customer(accountno,customername,mobileno,email,address) values(124,'Amit',54453,'amit@gmail.com','Pune');
+insert into customer(accountno,customername,mobileno,email,address) values(125,'Ketaki',65842,'ketaki@gmail.com','Delhi');
+mysql> insert into transactions(account_type,amount,customer_id)values('Credit',5000,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',500,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',800,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',2000,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Credit',1000,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Credit',50000,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Credit',5000,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',4000,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',3000,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transactions(account_type,amount,customer_id)values('Debit',1000,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer cust inner join transactions trans on cust.id = trans.customer_id;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust inner join transactions trans on cust.id = trans.customer_id;
+
+mysql>select cust.customername,trans.account_type,trans.amount from customer cust inner join transactions trans on cust.id = trans.customer_id where cust.id = 1;
+
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust left join transactions trans on cust.id = trans.customer_id;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust inner join transactions trans on cust.id = trans.customer_id;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust left join transactions trans on cust.id = trans.customer_id;
+
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust right join transactions trans on cust.id = trans.customer_id;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust right join transactions trans on cust.id = trans.customer_id order by amount;
+mysql> select cust.customername,trans.account_type,trans.amount from customer cust right join transactions trans on cust.id = trans.customer_id order by amount desc;
+mysql> select * from customer where id not in (select customer_id from transactions);
+mysql> select * from customer where id  in (select customer_id from transactions);
+mysql> select sum(amount) from customer c inner join transactions t on c.id = t.customer_id group by account_type;
++-------------+
+| sum(amount) |
++-------------+
+|       61000 |
+|       11300 |
++-------------+
+mysql> select sum(amount) from customer c inner join transactions t on c.id = t.customer_id where t.account_type = 'Credit' and c.id = 1  group by account_type;
++-------------+
+| sum(amount) |
++-------------+
+|        6000 |
++-------------+
+mysql>
+select sum(amount) from customer c inner join transactions t on c.id = t.customer_id where t.account_type = 'Credit' and c.id = 2  group by account_type;
++-------------+
+| sum(amount) |
++-------------+
+|       55000 |
++-------------+
+
+mysql>
+select (sum(t.amount) -
+(select sum(amount) from transactions where  customer_id = 2
+group by account_type
+having account_type='Debit')) as bal
+from transactions t  where t.customer_id = 2
+group by t.account_type;
+
+mysql> select count(*) from transactions;
+mysql> select count(*) from transactions where customer_id = 2;
+mysql> select count(*) from transactions where customer_id = 2 and account_type = 'Credit';
+mysql> select count(*) nooftransactions  from transactions where customer_id = 2 and account_type = 'Credit'
+mysql> select count(*) as "no of transactions"  from transactions where customer_id = 2 and account_type = 'Credit';
+
+
+
+spring is a DI framework to make java app loosely coupled
+makes the easy development of JavaEE appl
+developed by Rod Johnson 2003
+
+DI
+- design pattern
+
+
+Explain about Layers
+1. UI Layer
+2. bussiness/services layer
+3. data access layer
+4. DB
+
+ Dependency injection is a pattern we can use to implement IoC
+
+
+
+
+

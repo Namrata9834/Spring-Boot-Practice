@@ -1,0 +1,45 @@
+CompanyMaster   VendorMaster
+1. id		    id
+2. companyName	vendorName
+3. address
+4. city
+5. state
+6. zip
+7. gstNo
+
+ItemMaster
+1. id
+2. itemName
+3. quantity
+4. unitPrice
+5. actualRate
+
+  PurchaseOrder PurchaseOrderDetails
+1. id		    id
+2. @companyId	@poId
+3. poNumber      @itemId
+4. poDate        quantity
+5. @vendorId     unitPrice
+6. subTotal	     amount
+7. freight
+8. tax
+9. orderTotal
+
+1. @ the time of insertion
+	amount =  (qty * unitprice)
+show the details of purchase order
+Sr No PoNumber PoDate Item quantity unitPrice amount
+
+update  orderTotal against ponumber
+1. update subtotal = sum(amount)
+2. calculate order total = subtotal+freight+tax
+
+mysql> insert into PurchaseOrder(CompanyId,PoNumber,PoDate,VendorId)values(1,'PO/22-23/1',now(),1);
+mysql>insert into PurchaseOrderDetails(purchaseId,itemId,Quantity,unitPrice,amount)values(1,1,2,25000,(25000*2));
+
+mysql>  select PoNumber,PoDate, i.ItemName,pod.Quantity,pod.unitPrice,pod.Amount
+    ->  from PurchaseOrder po
+    ->  inner join PurchaseOrderDetails pod on po.id = pod.purchaseId
+    ->  inner join ItemMaster i on i.id = pod.itemId;
+mysql> update PurchaseOrder set SubTotal = 50000,freight = 250,Tax = 6000 where id = 1;
+mysql> update PurchaseOrder set Total = (SubTotal+freight+Tax);

@@ -1,0 +1,142 @@
+framework
+ - reuse pre-written code(templates)
+
+Spring
+	- powerful & lightweight application development framework
+	-  a framework of frameworks because it supports various framework like struts,
+	hibernate,EJB & JSF
+
+Features
+1. Lightweight
+2. Inversion of Control(IoC)
+	- loosely coupling
+3. Aspect Oriented Programming(AOP)
+	- by separating the application business logic from system service
+4. Container
+	- creates & manages life of cycle & configuration of application objects
+5. MVC Framework
+	- configurable via interface & accommodates multiple view technologies
+6. Transaction Management
+	- provides a generic abstraction layer
+
+Why we used Spring?
+1. works on POJO(Plain Old Java Object)
+		by using this our application will be lightweight
+2. predefined templates for JDBC,Hibernate,JPA
+3. Because of Dependency Injection(DI), our code becomes loosely coupled
+4. development becomes faster
+5. supports for transaction,validation,caching
+
+Spring Framework Architecture
+1. Test
+	- layer provides support of testing with JUnit & TestNG
+2. Core Container
+	- contains core,beans,context & SpEL
+	a) core & beans
+		- provides IoC & DI features
+	b) Context
+		- supports internationalization(118N),EJB,JMS,Basic Remoting
+	d) SpEL(Expression Language)
+		- provides support to setting & getting property values, methods invocation,
+		accessing the collections,logical & arithmetic operators, retrieval of objects by name
+3. AOP
+	- use Advices, Pointcuts to decouple the code
+4. Aspect
+    - support to integration with AspectJ
+5. Instrumentation
+	- support to class instrumentation
+6. Messaging(Java Messaging Service)
+	- contains features for producing and consuming messages
+7. Data Access/Integration
+	- contains JDBC,ORM,OXM,JMS & Transaction
+	- provides support to interact with database
+	a) JDBC -  provides a JDBC-abstraction layer that removes the need to do
+	tedious JDBC coding and parsing of database-vendor specific error codes
+	b) ORM - provides integration layers for popular object-relational mapping APIs,
+	 including JPA, JDO, Hibernate, and iBatis
+	c)OXM -  provides an abstraction layer that supports Object/XML mapping implementations
+	for JAXB, Castor, XMLBeans, JiBX and XStream
+	d) Transaction -  supports programmatic and declarative transaction management
+8. Web
+	- contains Web,Servlet & Portlet,Struts
+	- provides support to create a web application
+
+
+IoC Container
+	- core of spring framework
+	- creates the objects, configures & assembles their dependencies, manages entire life cycle
+	of objects
+	- uses DI to manages the components that make up the application
+	- controlling of objects & their lifecycle
+
+Dependency Injection(DI)
+	- main functionality provided by IoC
+	- responsible for injecting dependencies thro' either constructor or setter method
+	- connecting the objects with other objects or injecting objects into other objects
+
+ApplicationContext
+	- represents the IoC container
+	- spring container is responsible for instantiating, configuring & assembling objects (Beans)
+	- Central interface to provide configuration for an application.
+
+Bean Factory
+	- The root interface for accessing a Spring bean container.
+
+@Configuration
+	- indicates that the class is a source of bean definition
+
+pom.xml
+	- contains information about the project & configuration details used by maven to build the project
+	- when executing the task,maven looks for the pom file in current directory
+	- maven reads the POM, gets the needed configuration details,then executes the task
+Spring Boot
+- advanced concept of Spring framework
+- is it built on the top of the Spring framework
+- create a standalone Spring-Based application
+- provides RAD(Rapid Application Development) feature
+Restful
+
+
+How Spring Boot application works internally?
+ - starts using main method
+ - main method calls the run method(static)
+ - application context searches for the classes annotated with @Configuration
+    & initializes all the declared beans in those configuration classes
+ - based on scope of those beans, stores those beans in JVM specifically in IoC container
+ - after creation of all beans,automatically configures dispatch servlet
+ - register the default handler mappings
+
+ Apache Tomcat-
+SPRING DATA
+
+
+spring-boot-starter-web
+	- for building web application using Spring MVC
+	- uses the tomcat as the default embedded container
+
+spring-boot-devtools
+	- for live reload or automatic reload of application
+
+spring-boot-starter-jdbc
+	- for communicating with the database
+
+lombok
+	- a java library that will reduce the boilerplate code
+	that we usually write inside the entity class like setters,getters,
+		& toString()
+
+mysql-connector-java
+	- store the data into the database
+
+application.properties
+	- configures the application
+	- file allows to run an application in different environment
+
+
+
+Scope
+Devtools
+tomcat
+embedded
+undertow
+Explain Singleton class?
