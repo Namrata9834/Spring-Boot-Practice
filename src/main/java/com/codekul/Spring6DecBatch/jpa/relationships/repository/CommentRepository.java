@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface CommentRepository extends JpaRepository<Comments,Long> {
+public interface
+CommentRepository extends JpaRepository<Comments,Long> {
 
     @Query(value = " select id,comment,comment_date,comment_time from comments where post_id = ?1",nativeQuery = true)
     List<CommentsResponse> findByPostId(Long postId);

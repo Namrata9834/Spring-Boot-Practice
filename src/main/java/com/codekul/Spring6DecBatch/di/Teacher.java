@@ -7,6 +7,7 @@ public class Teacher {
     public Teacher(){}
    //DI thr the constructor
     public Teacher(Principle principle ){
+
        this.principle = principle;
    }
 

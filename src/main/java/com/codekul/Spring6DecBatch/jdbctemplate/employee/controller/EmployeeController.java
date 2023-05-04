@@ -44,7 +44,8 @@ public class EmployeeController {
     public String update(@RequestBody Employee employee,@PathVariable Long empId){
         employeeDao.update(empId,employee);
         return "Record updated successfully"; //@RequestBody maps the HttpRequest body to a transfer or domain object,
-    }
+    }                                          // when we want to update at that time use @RequestBody
+
 
     @DeleteMapping("/delete/{empId}")
     public String delete(@PathVariable Long empId){
